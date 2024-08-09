@@ -1,29 +1,37 @@
 import json
-from urllib import response
 import bcrypt
 from flask import request, jsonify
 from models.user import UserModel
 from controllers.jwt import crear_token
 import smtplib
 from email.mime.text import MIMEText
+import yagmail
+from jinja2 import Template
 
 
 #configuracion del correo
 CORREO_REMITENTE = "bovinsoft@gmail.com"
-PASSWORD_CORREO = "BOVINSOFT@500"
+PASSWORD_CORREO = "vsal gtkx dchi xyip"
 
 # Función para enviar correo de verificación
 def enviar_correo_verificacion(correo_destinatario, nombre):
-    mensaje = MIMEText(f"Hola {nombre}, gracias por registrarte!")
-    mensaje["Subject"] = "Verificación de registro"
-    mensaje["From"] = CORREO_REMITENTE
-    mensaje["To"] = correo_destinatario
 
-    servidor = smtplib.SMTP("smtp.gmail.com", 587)
-    servidor.starttls()
-    servidor.login(CORREO_REMITENTE, PASSWORD_CORREO)
-    servidor.sendmail(CORREO_REMITENTE, correo_destinatario, mensaje.as_string())
-    servidor.quit()
+    # Create a yagmail object
+    yag = yagmail.SMTP(CORREO_REMITENTE, PASSWORD_CORREO)
+
+    # Send the email
+    yag.send(
+        to=correo_destinatario,
+        subject="Verificación de registro",
+        contents=f"""\
+<html>
+  <body>
+    <h1>Verificación de registro</h1>
+    <p>Hola {nombre}, gracias por registrarte!</p>
+    <img src='https://st2.depositphotos.com/1765488/5294/i/450/depositphotos_52940845-stock-photo-herd-of-cows-at-summer.jpg'/>
+  </body>
+</html>
+""")
 
 ##funcion para validar si el correo existe
 def validacion_gmail(coll, email):
@@ -64,11 +72,11 @@ def signin(collections):
             "nombre": user_instace.nombre,
             "apellido": user_instace.apellido,
             "edad": user_instace.edad,
-            "email": user_instace.email,
-            "password": user_instace.password
+            "email": user_instace.email
         }
         token = crear_token(data=user_data)
         enviar_correo_verificacion(user_instace.email, user_instace.nombre)
+        print(user_instace.email)
         return jsonify({'id':str(id), "token":token.decode('utf-8')})
 
     except:

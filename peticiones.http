@@ -1,0 +1,18 @@
+@api = http://127.0.0.1:5000
+
+###
+GET {{api}}
+
+###
+POST {{api}}/signin
+Content-Type: application/json
+
+{
+    "nombre":"Freddy",
+    "apellido":"Gomez",
+    "edad":26,
+    "email":"gomex6798@gmail.com",
+    "password":"FREDDY123"
+}
+
+####eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJGcmVkZHkiLCJhcGVsbGlkbyI6IkdvbWV6IiwiZWRhZCI6MjYsImVtYWlsIjoiZ29tZXg2Nzk4QGdtYWlsLmNvbSIsImV4cCI6MTcyMzM0MTE4OH0.yUWSQszhRw2bEZURnBYPEWuJXMm7xh0UMjWCTcwoAJE
