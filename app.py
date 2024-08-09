@@ -16,14 +16,3 @@ app.register_blueprint(home)
 
 if __name__ == '__main__':
     app.run(debug=DEBUG, port=PORT)
-
-
-app = Flask(__name__)
-
-@app.route('/')
-def hola():
-    return "hola mundo"
-
-if __name__ == '__main__':
-    app.run()
-
