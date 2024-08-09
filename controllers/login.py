@@ -14,20 +14,34 @@ CORREO_REMITENTE = "bovinsoft@gmail.com"
 PASSWORD_CORREO = "vsal gtkx dchi xyip"
 
 # Función para enviar correo de verificación
-def enviar_correo_verificacion(correo_destinatario, nombre):
+def enviar_correo_verificacion(correo_destinatario, nombre, apellido):
 
     # Create a yagmail object
-    yag = yagmail.SMTP(CORREO_REMITENTE, PASSWORD_CORREO)
-
+    yagD = yagmail.SMTP(CORREO_REMITENTE, PASSWORD_CORREO)
+    yagR = yagmail.SMTP(CORREO_REMITENTE, PASSWORD_CORREO)
+    
     # Send the email
-    yag.send(
+    yagD.send(
         to=correo_destinatario,
         subject="Verificación de registro",
         contents=f"""\
 <html>
   <body>
     <h1>Verificación de registro</h1>
-    <p>Hola {nombre}, gracias por registrarte!</p>
+    <p>Hola {nombre} {apellido}, gracias por registrarte!</p>
+    <img src='https://st2.depositphotos.com/1765488/5294/i/450/depositphotos_52940845-stock-photo-herd-of-cows-at-summer.jpg'/>
+  </body>
+</html>
+""")
+
+    yagR.send(
+        to=CORREO_REMITENTE,
+        subject="Verificación de registro",
+        contents=f"""\
+<html>
+  <body>
+    <h1>Verificación de registro de usuarios</h1>
+    <p>Felicidades, se ha registrado un usuario nuevo: {nombre} {apellido}</p>
     <img src='https://st2.depositphotos.com/1765488/5294/i/450/depositphotos_52940845-stock-photo-herd-of-cows-at-summer.jpg'/>
   </body>
 </html>
@@ -75,8 +89,7 @@ def signin(collections):
             "email": user_instace.email
         }
         token = crear_token(data=user_data)
-        enviar_correo_verificacion(user_instace.email, user_instace.nombre)
-        print(user_instace.email)
+        enviar_correo_verificacion(user_instace.email, user_instace.nombre, user_instace.apellido)
         return jsonify({'id':str(id), "token":token.decode('utf-8')})
 
     except:
