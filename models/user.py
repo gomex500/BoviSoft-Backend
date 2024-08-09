@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing_extensions import Self
 
 ##modelo de objeto usuario
 class UserModel:
