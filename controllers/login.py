@@ -116,8 +116,6 @@ def login(collections):
             "nombre": user_doc['nombre'],
             "apellido": user_doc['apellido'],
             "edad": user_doc['edad'],
-            "rol":user_instance.rol,
-            "telefono": user_doc['telefono'],
             "email": user_doc['email'],
             "password": user_doc['password']
         }

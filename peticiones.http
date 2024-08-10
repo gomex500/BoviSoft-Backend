@@ -1,5 +1,7 @@
 @api = http://127.0.0.1:5000
 
+@api2 = https://bovinsoft-backend.onrender.com/
+
 ###
 GET {{api}}
 
@@ -15,4 +17,13 @@ Content-Type: application/json
     "password":"FREDDY123"
 }
 
-####eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJGcmVkZHkiLCJhcGVsbGlkbyI6IkdvbWV6IiwiZWRhZCI6MjYsImVtYWlsIjoiZ29tZXg2Nzk4QGdtYWlsLmNvbSIsImV4cCI6MTcyMzM0MTE4OH0.yUWSQszhRw2bEZURnBYPEWuJXMm7xh0UMjWCTcwoAJE
+###
+POST {{api}}/login
+Content-Type: application/json
+
+{
+    "email":"gomex6798@gmail.com",
+    "password":"FREDDY123"
+}
+
+####eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJGcmVkZHkiLCJhcGVsbGlkbyI6IkdvbWV6IiwiZWRhZCI6MjYsImVtYWlsIjoiZ29tZXg2Nzk4QGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEyJFEwMjguNDhvNnVYS1RzNWJ2c1lXUi43d0wvTC5DZ2lTQ2U5VU1YQjdOZHp5Qzdwb2g2emZTIiwiZXhwIjoxNzIzNDE2NTM5fQ.VstGXT1CSgMahM7iTPxYgB9S4gFW73IpRiZpBwyE7ik
