@@ -1,0 +1,153 @@
+"usuarios": {
+    "_id": "ObjectId",
+    "nombre": "string",
+    "correo": "string",
+    "contraseña": "string",
+    "rol": "string", // Ej: "admin", "ganadero", "veterinario"
+    "perfil": {
+      "telefono": "string",
+      "direccion": "string",
+      "tipoSuscripcion": "string" // Ej: "básica", "premium"
+    },
+    "fechaCreacion": "Date",
+    "ultimaActividad": "Date"
+}
+
+"fincas": {
+    "_id": "ObjectId",
+    "nombre": "string",
+    "ubicacion": {
+      "direccion": "string",
+      "coordenadas": {
+        "latitud": "number",
+        "longitud": "number"
+      }
+    },
+    "tamaño": "number", // En hectáreas
+    "descripcion": "string",
+    "idUsuario": "ObjectId", // Referencia al usuario propietario
+    "fechaRegistro": "Date"
+  }
+
+"bovinos": {
+    "_id": "ObjectId",
+    "idFinca": "ObjectId", // Referencia a la finca
+    "nombre": "string",
+    "raza": "string",
+    "fechaNacimiento": "Date",
+    "genero": "string", // Ej: "macho", "hembra"
+    "tipo": "string", // Ej: "carne", "leche", "mixto"
+    "estadoSalud": "string", // Ej: "sano", "enfermo"
+    "fechaRegistro": "Date",
+    "historial": [
+      {
+        "tipoEvento": "string", // Ej: "vacunación", "enfermedad", "parto"
+        "descripcion": "string",
+        "fecha": "Date"
+      }
+    ]
+  }
+
+"HistorialSalud" : {
+    "_id": "ObjectId",
+    "idBovino": "ObjectId", // Referencia al bovino
+    "evento": "string", // Ej: "vacunación", "tratamiento", "enfermedad"
+    "descripcion": "string",
+    "fecha": "Date",
+    "nombreVeterinario": "string",
+    "observaciones": "string"
+  }
+
+"historialInformes":{
+    "_id": "ObjectId",
+    "idUsuario": "ObjectId", // Referencia al usuario que genera el informe
+    "tipoInforme": "string", // Ej: "producción", "salud", "general"
+    "descripcion": "string",
+    "fechaGeneracion": "Date",
+    "detalles": {
+      "idFinca": "ObjectId",
+      "idBovino": "ObjectId",
+      "observaciones": "string"
+    }
+  }
+
+"AlertasNotificaciones": {
+    "_id": "ObjectId",
+    "idUsuario": "ObjectId", // Referencia al usuario
+    "tipoAlerta": "string", // Ej: "vacunación", "enfermedad", "producción baja"
+    "mensaje": "string",
+    "idFinca": "ObjectId",
+    "idBovino": "ObjectId",
+    "fechaAlerta": "Date",
+    "leido": "boolean"
+  }
+
+"foto":{
+    "_id": "ObjectId",
+    "titulo": "string",
+    "contenido": "string",
+    "idUsuario": "ObjectId", // Referencia al usuario que publicó el tema
+    "fechaCreacion": "Date",
+    "categoria": "string", // Ej: "salud", "producción", "general"
+    "comentarios": [
+      {
+        "idUsuario": "ObjectId",
+        "contenido": "string",
+        "fecha": "Date",
+        "likes": "number"
+      }
+    ],
+    "Interaciones": [
+        {
+            "idUsuario": "ObjectId", // Referencia al usuario que interactuó
+            "tipoInteraccion": "string", // Ej: "like", "dislike", "reportar"
+            "fecha": "Date"
+          }          
+    ]
+  }
+  
+"chatbot":{
+    "_id": "ObjectId",
+    "idUsuario": "ObjectId",
+    "preguntaUsuario": "string",
+    "respuestaChatbot": "string",
+    "fecha": "Date",
+    "categoria": "string" // Ej: "salud", "producción", "recomendaciones"
+  }
+
+"vacunasTratamiento": {
+    "_id": "ObjectId",
+    "nombre": "string", // Nombre de la vacuna o tratamiento
+    "tipo": "string", // Ej: "vacuna", "antibiótico", "suplemento"
+    "descripcion": "string",
+    "periodicidad": "string", // Ej: "anual", "mensual"
+    "dosis": "string",
+    "fechaRegistro": "Date"
+  }
+
+"metricas": {
+    "_id": "ObjectId",
+    "idFinca": "ObjectId", // Referencia a la finca
+    "produccionDiaria": [
+      {
+        "fecha": "Date",
+        "cantidad": "number", // Ej: cantidad de leche en litros
+        "tipo": "string" // Ej: "leche", "carne"
+      }
+    ],
+    "produccionMensual": [
+      {
+        "mes": "string",
+        "año": "number",
+        "cantidad": "number"
+      }
+    ],
+    "saludGeneral": [
+      {
+        "fecha": "Date",
+        "indiceSalud": "number", // Valor de 0 a 100 indicando la salud general
+        "problemas": "number" // Número de problemas de salud reportados
+      }
+    ]
+  }
+  

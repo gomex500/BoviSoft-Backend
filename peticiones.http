@@ -10,11 +10,11 @@ POST {{api}}/signin
 Content-Type: application/json
 
 {
-    "nombre":"Nicho",
-    "apellido":"Maltez",
+    "nombre":"Enrique",
+    "apellido":"Fernandez",
     "fecha_nacimiento":"YYYY-MM-DD",
-    "email":"josethgatica@gmail.com",
-    "password":"MANZANAREZ23"
+    "email":"glianjose@gmail.com",
+    "password":"quique123"
 }
 
 ###
@@ -30,6 +30,6 @@ Content-Type: application/json
 ##obtner usuarios
 ####
 GET {{api}}/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJOaWNobyIsImFwZWxsaWRvIjoiTWFsdGV6IiwiZWRhZCI6MTksImVtYWlsIjoiam9zZXRoZ2F0aWNhQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEyJERSYjJsekV4TnQub2tCRHlQV3dLNU9rdWYyUTcucFdKQVBNY3EyMUtuV3hnQWxGNksyMDlDIiwiZXhwIjoxNzIzNTgyODE4fQ.CEs718SjS89l7cS8jl0pn8Ewh49PLl4sm-rU-MLzCDE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJFbnJpcXVlIiwiYXBlbGxpZG8iOiJGZXJuYW5kZXoiLCJlZGFkIjoiWVlZWS1NTS1ERCIsImVtYWlsIjoiZ2xpYW5qb3NlQGdtYWlsLmNvbSIsImV4cCI6MTcyNTgxMDk5MX0.JkDvtCwdiPo6mHmhgHIdp-p69ic5bjFDLA9RjkIM1Ww
 
 ####eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJGcmVkZHkiLCJhcGVsbGlkbyI6IkdvbWV6IiwiZWRhZCI6MjYsImVtYWlsIjoiZ29tZXg2Nzk4QGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEyJFEwMjguNDhvNnVYS1RzNWJ2c1lXUi43d0wvTC5DZ2lTQ2U5VU1YQjdOZHp5Qzdwb2g2emZTIiwiZXhwIjoxNzIzNDE2NTM5fQ.VstGXT1CSgMahM7iTPxYgB9S4gFW73IpRiZpBwyE7ik

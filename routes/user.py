@@ -1,5 +1,3 @@
-from crypt import methods
-from lib2to3.pgen2 import token
 from flask import Blueprint, request, jsonify
 from controllers.jwt import validar_token
 from configs.conecction import collections
