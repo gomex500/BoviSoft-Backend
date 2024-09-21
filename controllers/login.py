@@ -86,7 +86,11 @@ def signin(collections):
             "nombre": user_instace.nombre,
             "apellido": user_instace.apellido,
             "edad": user_instace.edad,
-            "email": user_instace.email
+            "email": user_instace.email,
+            "telefono": user_instace.telefono,
+            "rol": user_instace.rol,
+            "direccion": user_instace.direccion,
+            "tipoSuscripcion": user_instace.tipoSuscripcion
         }
         token = crear_token(data=user_data)
         enviar_correo_verificacion(user_instace.email, user_instace.nombre, user_instace.apellido)
@@ -117,7 +121,11 @@ def login(collections):
             "apellido": user_doc['apellido'],
             "edad": user_doc['edad'],
             "email": user_doc['email'],
-            "password": user_doc['password']
+            "password": user_doc['password'],
+            "telefono": user_doc['telefono'],
+            "rol": user_doc['rol'],
+            "direccion": user_doc['direccion'],
+            "tipoSuscripcion": user_doc['tipoSuscripcion']
         }
         # Validar la contraseña
         if not bcrypt.checkpw(user_instance.password.encode('utf-8'), user_doc['password'].encode('utf-8')):
