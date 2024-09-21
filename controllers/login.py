@@ -85,7 +85,7 @@ def signin(collections):
         user_data = {
             "nombre": user_instace.nombre,
             "apellido": user_instace.apellido,
-            "edad": user_instace.edad,
+            "fecha_nacimiento": user_instace.fecha_nacimiento,
             "email": user_instace.email,
             "telefono": user_instace.telefono,
             "rol": user_instace.rol,
@@ -119,7 +119,7 @@ def login(collections):
         user_data = {
             "nombre": user_doc['nombre'],
             "apellido": user_doc['apellido'],
-            "edad": user_doc['edad'],
+            "fecha_nacimiento": user_doc['fecha_nacimiento'],
             "email": user_doc['email'],
             "password": user_doc['password'],
             "telefono": user_doc['telefono'],

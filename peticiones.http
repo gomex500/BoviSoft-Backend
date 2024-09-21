@@ -13,6 +13,10 @@ Content-Type: application/json
     "nombre":"Enrique",
     "apellido":"Fernandez",
     "fecha_nacimiento":"YYYY-MM-DD",
+    "telefono":"+505 82181 663",
+    "tipoSuscripcion":"mensual",
+    "direccion":"juigalpa, chontales",
+    "rol":"admin",
     "email":"glianjose@gmail.com",
     "password":"quique123"
 }

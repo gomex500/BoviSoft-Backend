@@ -16,7 +16,7 @@ def verificar_token():
         validar_token(token, output=False)
     except:
         return jsonify({"Mensaje":"Error de autenticacion, no estas autorizado"})
-
+        
 #ruta mostrar usuarios
 @user_routes.route('/users', methods=['GET'])
 def obtener_usuarios_ruta():
