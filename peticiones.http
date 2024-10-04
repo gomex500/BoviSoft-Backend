@@ -10,15 +10,16 @@ POST {{api}}/signin
 Content-Type: application/json
 
 {
-    "nombre":"Enrique",
-    "apellido":"Fernandez",
+    "nombre":"Freddy",
+    "apellido":"Gomez",
     "fecha_nacimiento":"YYYY-MM-DD",
     "telefono":"+505 82181 663",
     "tipoSuscripcion":"mensual",
     "direccion":"juigalpa, chontales",
     "rol":"admin",
-    "email":"glianjose@gmail.com",
-    "password":"quique123"
+    "email":"gomex6798@gmail.com",
+    "password":"1234",
+    "image": "zdfgdfghfdhgh"
 }
 
 ###
@@ -34,6 +35,13 @@ Content-Type: application/json
 ##obtner usuarios
 ####
 GET {{api}}/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJFbnJpcXVlIiwiYXBlbGxpZG8iOiJGZXJuYW5kZXoiLCJlZGFkIjoiWVlZWS1NTS1ERCIsImVtYWlsIjoiZ2xpYW5qb3NlQGdtYWlsLmNvbSIsImV4cCI6MTcyNTgxMDk5MX0.JkDvtCwdiPo6mHmhgHIdp-p69ic5bjFDLA9RjkIM1Ww
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJGcmVkZHkiLCJhcGVsbGlkbyI6IkdvbWV6IiwiZmVjaGFfbmFjaW1pZW50byI6IllZWVktTU0tREQiLCJlbWFpbCI6ImdvbWV4Njc5OEBnbWFpbC5jb20iLCJ0ZWxlZm9ubyI6Iis1MDUgODIxODEgNjYzIiwicm9sIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJqdWlnYWxwYSwgY2hvbnRhbGVzIiwidGlwb1N1c2NyaXBjaW9uIjoibWVuc3VhbCIsImV4cCI6MTcyODE2NjY4MX0.Cq3hbZhzUDFl-k4UBqB6FdvBCQ0qllVekv-Tf10ZSEA
 
-####eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJGcmVkZHkiLCJhcGVsbGlkbyI6IkdvbWV6IiwiZWRhZCI6MjYsImVtYWlsIjoiZ29tZXg2Nzk4QGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEyJFEwMjguNDhvNnVYS1RzNWJ2c1lXUi43d0wvTC5DZ2lTQ2U5VU1YQjdOZHp5Qzdwb2g2emZTIiwiZXhwIjoxNzIzNDE2NTM5fQ.VstGXT1CSgMahM7iTPxYgB9S4gFW73IpRiZpBwyE7ik
+
+### "id": "66ff6c787a81ade5258dc6e6",
+
+
+
+###obtner un usuario por id
+GET {{api}}/user/66ff6c787a81ade5258dc6e6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJGcmVkZHkiLCJhcGVsbGlkbyI6IkdvbWV6IiwiZmVjaGFfbmFjaW1pZW50byI6IllZWVktTU0tREQiLCJlbWFpbCI6ImdvbWV4Njc5OEBnbWFpbC5jb20iLCJ0ZWxlZm9ubyI6Iis1MDUgODIxODEgNjYzIiwicm9sIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJqdWlnYWxwYSwgY2hvbnRhbGVzIiwidGlwb1N1c2NyaXBjaW9uIjoibWVuc3VhbCIsImV4cCI6MTcyODE2NjY4MX0.Cq3hbZhzUDFl-k4UBqB6FdvBCQ0qllVekv-Tf10ZSEA

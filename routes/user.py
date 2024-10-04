@@ -2,7 +2,8 @@ from flask import Blueprint, request, jsonify
 from controllers.jwt import validar_token
 from configs.conecction import collections
 from controllers.user import (
-    obtener_usuarios
+    obtener_usuarios,
+    obtener_usuario
 )
 
 #inicalizando ruta
@@ -21,3 +22,8 @@ def verificar_token():
 @user_routes.route('/users', methods=['GET'])
 def obtener_usuarios_ruta():
     return obtener_usuarios(collections('usuarios'))
+
+#ruta mostrar usuario
+@user_routes.route('/user/<id>', methods=['GET'])
+def obtener_usuario_ruta(id):
+    return obtener_usuario(collections('usuarios'), id)
