@@ -7,6 +7,7 @@ GET {{api}}
 
 ### ingresar finca
 POST {{api}}/finca
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJGcmVkZHkiLCJhcGVsbGlkbyI6IkdvbWV6IiwiZmVjaGFfbmFjaW1pZW50byI6IllZWVktTU0tREQiLCJlbWFpbCI6ImdvbWV4Njc5OEBnbWFpbC5jb20iLCJ0ZWxlZm9ubyI6Iis1MDUgODIxODEgNjYzIiwicm9sIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJqdWlnYWxwYSwgY2hvbnRhbGVzIiwidGlwb1N1c2NyaXBjaW9uIjoibWVuc3VhbCIsImV4cCI6MTcyODE2NjY4MX0.Cq3hbZhzUDFl-k4UBqB6FdvBCQ0qllVekv-Tf10ZSEA
 Content-Type: application/json
 
 {
@@ -24,5 +25,42 @@ Content-Type: application/json
         "pastos"
     ],
     "descripcion":"df bmsadcv awkerklewrqw",
-    "idUsuario":"66ff6c787a81ade5258dc6e6",
+    "idUsuario":"66ff6c787a81ade5258dc6e6"
+}
+
+##obtner fincas por usuario 
+####
+GET {{api}}/fincas/66ff6c787a81ade5258dc6e6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJGcmVkZHkiLCJhcGVsbGlkbyI6IkdvbWV6IiwiZmVjaGFfbmFjaW1pZW50byI6IllZWVktTU0tREQiLCJlbWFpbCI6ImdvbWV4Njc5OEBnbWFpbC5jb20iLCJ0ZWxlZm9ubyI6Iis1MDUgODIxODEgNjYzIiwicm9sIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJqdWlnYWxwYSwgY2hvbnRhbGVzIiwidGlwb1N1c2NyaXBjaW9uIjoibWVuc3VhbCIsImV4cCI6MTcyODE2NjY4MX0.Cq3hbZhzUDFl-k4UBqB6FdvBCQ0qllVekv-Tf10ZSEA
+
+##obtner finca por id
+####
+GET {{api}}/finca/66ff7dd70d375412d83ec642
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJGcmVkZHkiLCJhcGVsbGlkbyI6IkdvbWV6IiwiZmVjaGFfbmFjaW1pZW50byI6IllZWVktTU0tREQiLCJlbWFpbCI6ImdvbWV4Njc5OEBnbWFpbC5jb20iLCJ0ZWxlZm9ubyI6Iis1MDUgODIxODEgNjYzIiwicm9sIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJqdWlnYWxwYSwgY2hvbnRhbGVzIiwidGlwb1N1c2NyaXBjaW9uIjoibWVuc3VhbCIsImV4cCI6MTcyODE2NjY4MX0.Cq3hbZhzUDFl-k4UBqB6FdvBCQ0qllVekv-Tf10ZSEA
+
+###eliminar finca
+DELETE {{api}}/finca/66ff7828f4309ce8a5127605
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJGcmVkZHkiLCJhcGVsbGlkbyI6IkdvbWV6IiwiZmVjaGFfbmFjaW1pZW50byI6IllZWVktTU0tREQiLCJlbWFpbCI6ImdvbWV4Njc5OEBnbWFpbC5jb20iLCJ0ZWxlZm9ubyI6Iis1MDUgODIxODEgNjYzIiwicm9sIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJqdWlnYWxwYSwgY2hvbnRhbGVzIiwidGlwb1N1c2NyaXBjaW9uIjoibWVuc3VhbCIsImV4cCI6MTcyODE2NjY4MX0.Cq3hbZhzUDFl-k4UBqB6FdvBCQ0qllVekv-Tf10ZSEA
+
+### ingresar finca
+PUT  {{api}}/finca/66ff7dd70d375412d83ec642
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJGcmVkZHkiLCJhcGVsbGlkbyI6IkdvbWV6IiwiZmVjaGFfbmFjaW1pZW50byI6IllZWVktTU0tREQiLCJlbWFpbCI6ImdvbWV4Njc5OEBnbWFpbC5jb20iLCJ0ZWxlZm9ubyI6Iis1MDUgODIxODEgNjYzIiwicm9sIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJqdWlnYWxwYSwgY2hvbnRhbGVzIiwidGlwb1N1c2NyaXBjaW9uIjoibWVuc3VhbCIsImV4cCI6MTcyODE2NjY4MX0.Cq3hbZhzUDFl-k4UBqB6FdvBCQ0qllVekv-Tf10ZSEA
+Content-Type: application/json
+
+{
+    "nombre":"Rancho El juan",
+    "image":"awfswgrger",
+    "direccion":"km 150 carretera al managua",
+    "coordenadas":{
+        "latitud": "12.12345",
+        "longitud": "-86.12345"
+    },
+    "tamano":"3435",
+    "recursosN":[
+        "agua",
+        "bosques",
+        "pastos"
+    ],
+    "descripcion":"df bmsadcv awkerklewrqw",
+    "idUsuario":"66ff6c787a81ade5258dc6e6"
 }

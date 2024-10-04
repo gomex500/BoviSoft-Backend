@@ -27,7 +27,7 @@ def insertar_finca_ruta():
     return insertar_finca(collections('fincas'))
 
 #ruta mostrar fincas
-@finca_routes.route('/finca/<idUsuario>', methods=['GET'])
+@finca_routes.route('/fincas/<idUsuario>', methods=['GET'])
 def obtener_finca_ruta(idUsuario):
     return obtener_fincas(collections('fincas'), idUsuario)
 
