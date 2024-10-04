@@ -5,7 +5,7 @@
 ###
 GET {{api}}
 
-###
+### registro de usuario
 POST {{api}}/signin
 Content-Type: application/json
 
@@ -17,12 +17,12 @@ Content-Type: application/json
     "tipoSuscripcion":"mensual",
     "direccion":"juigalpa, chontales",
     "rol":"admin",
-    "email":"gomex6798@gmail.com",
+    "email":"ddfdfdf@gmail.com",
     "password":"1234",
     "image": "zdfgdfghfdhgh"
 }
 
-###
+### logeo de usuario
 POST {{api}}/login
 Content-Type: application/json
 
@@ -48,3 +48,35 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJGcmVkZ
 ###obtener usuario por email
 GET {{api}}/email/gomex6798@gmail.com
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJGcmVkZHkiLCJhcGVsbGlkbyI6IkdvbWV6IiwiZmVjaGFfbmFjaW1pZW50byI6IllZWVktTU0tREQiLCJlbWFpbCI6ImdvbWV4Njc5OEBnbWFpbC5jb20iLCJ0ZWxlZm9ubyI6Iis1MDUgODIxODEgNjYzIiwicm9sIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJqdWlnYWxwYSwgY2hvbnRhbGVzIiwidGlwb1N1c2NyaXBjaW9uIjoibWVuc3VhbCIsImV4cCI6MTcyODE2NjY4MX0.Cq3hbZhzUDFl-k4UBqB6FdvBCQ0qllVekv-Tf10ZSEA
+
+###eliminar usuario
+
+DELETE {{api}}/user/66ff701ac4df0ebed30b4170
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJGcmVkZHkiLCJhcGVsbGlkbyI6IkdvbWV6IiwiZmVjaGFfbmFjaW1pZW50byI6IllZWVktTU0tREQiLCJlbWFpbCI6ImdvbWV4Njc5OEBnbWFpbC5jb20iLCJ0ZWxlZm9ubyI6Iis1MDUgODIxODEgNjYzIiwicm9sIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJqdWlnYWxwYSwgY2hvbnRhbGVzIiwidGlwb1N1c2NyaXBjaW9uIjoibWVuc3VhbCIsImV4cCI6MTcyODE2NjY4MX0.Cq3hbZhzUDFl-k4UBqB6FdvBCQ0qllVekv-Tf10ZSEA
+
+###actualizar usuario
+PUT {{api}}/user/66ff6c787a81ade5258dc6e6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJGcmVkZHkiLCJhcGVsbGlkbyI6IkdvbWV6IiwiZmVjaGFfbmFjaW1pZW50byI6IllZWVktTU0tREQiLCJlbWFpbCI6ImdvbWV4Njc5OEBnbWFpbC5jb20iLCJ0ZWxlZm9ubyI6Iis1MDUgODIxODEgNjYzIiwicm9sIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJqdWlnYWxwYSwgY2hvbnRhbGVzIiwidGlwb1N1c2NyaXBjaW9uIjoibWVuc3VhbCIsImV4cCI6MTcyODE2NjY4MX0.Cq3hbZhzUDFl-k4UBqB6FdvBCQ0qllVekv-Tf10ZSEA
+Content-Type: application/json
+
+{
+    "nombre":"Freddy",
+    "apellido":"Gomez",
+    "fecha_nacimiento":"YYYY-MM-DD",
+    "telefono":"+505 82181 663",
+    "tipoSuscripcion":"mensual",
+    "direccion":"juigalpa, chontales",
+    "rol":"admin",
+    "email":"gomex6798@gmail.com",
+    "password":"1234",
+    "image": "imagen12"
+}
+
+###actualizar rol de usuario
+PUT {{api}}/rol/66ff6c787a81ade5258dc6e6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJGcmVkZHkiLCJhcGVsbGlkbyI6IkdvbWV6IiwiZmVjaGFfbmFjaW1pZW50byI6IllZWVktTU0tREQiLCJlbWFpbCI6ImdvbWV4Njc5OEBnbWFpbC5jb20iLCJ0ZWxlZm9ubyI6Iis1MDUgODIxODEgNjYzIiwicm9sIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJqdWlnYWxwYSwgY2hvbnRhbGVzIiwidGlwb1N1c2NyaXBjaW9uIjoibWVuc3VhbCIsImV4cCI6MTcyODE2NjY4MX0.Cq3hbZhzUDFl-k4UBqB6FdvBCQ0qllVekv-Tf10ZSEA
+Content-Type: application/json
+
+{
+    "rol":"admin"
+}

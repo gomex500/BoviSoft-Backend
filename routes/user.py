@@ -4,7 +4,10 @@ from configs.conecction import collections
 from controllers.user import (
     obtener_usuarios,
     obtener_usuario,
-    obtener_email
+    obtener_email,
+    eliminar_usuario,
+    actualizar_usuario,
+    actualizar_rol
 )
 
 #inicalizando ruta
@@ -33,3 +36,19 @@ def obtener_usuario_ruta(id):
 @user_routes.route('/email/<email>', methods=['GET'])
 def obtener_email_ruta(email):
     return obtener_email(collections('usuarios'), email)
+
+
+#ruta eliminar usuario
+@user_routes.route('/user/<id>', methods=['DELETE'])
+def eliminar_usuario_ruta(id):
+    return eliminar_usuario(collections('usuarios'), id)
+
+#ruta actualizar usuario
+@user_routes.route('/user/<id>', methods=['PUT'])
+def actualizar_usuario_ruta(id):
+    return actualizar_usuario(collections('usuarios'), id)
+
+#ruta actualizar rol de usuario
+@user_routes.route('/rol/<id>', methods=['PUT'])
+def actualizar_rol_ruta(id):
+    return actualizar_rol(collections('usuarios'), id)

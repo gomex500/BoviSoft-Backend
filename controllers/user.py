@@ -4,6 +4,7 @@ from flask import request, jsonify
 from bson import ObjectId
 from models.user import UserModel
 import json
+import bcrypt
 
 ##obtener todos los usuarios
 def obtener_usuarios(collections):
@@ -49,3 +50,51 @@ def obtener_email(collections, email):
         response = jsonify({"message": "Error al buscar usuario por correo", "error": str(e)})
         response.status_code = 500
         return response
+
+#controlador eliminar usuario
+def eliminar_usuario(collections, id):
+    try:
+        collections.delete_one({'_id': ObjectId(id)})
+        return jsonify({'mensaje': 'Usuario eliminado'})
+    except:
+        response = jsonify({"menssage":"error de peticion"})
+        response.status = 401
+        return response
+
+#controlador actualizar usuario
+def actualizar_usuario(collections, id):
+    try:
+        user_data = collections.find_one({'_id': ObjectId(id)})
+        user_data_update = UserModel(request.json)
+
+        #encriptando password
+        password = user_data_update.password.encode('utf-8')
+        salt = bcrypt.gensalt()
+        passEncriptado = bcrypt.hashpw(password, salt)
+
+        #insertando datos sencibles
+        user_data_update.create_at = user_data['create_at']
+        user_data_update.update_at = datetime.now()
+        user_data_update.password = passEncriptado.decode('utf-8')
+
+        collections.update_one({'_id': ObjectId(id)}, {"$set": user_data_update.__dict__})
+        return jsonify({"message": "usuario actualizado"})
+    except:
+        response = jsonify({"menssage":"error de peticion"})
+        response.status = 401
+        return response
+
+# Controlador para actualizar el rol de un usuario
+def actualizar_rol(collections, id):
+    try:
+        nuevo_rol = request.json.get('rol')
+        print(request.json.get('rol'))
+        roles_validos = ['admin', 'user', 'premium']
+        if nuevo_rol not in roles_validos:
+            return jsonify({'message': 'Rol no válido'}), 400
+
+        collections.update_one({'_id': ObjectId(id)}, {'$set': {'rol': nuevo_rol}})
+        return jsonify({'message': 'Rol actualizado correctamente'}), 200
+
+    except Exception as e:
+        return jsonify({'message': 'Error al actualizar el rol', 'error': str(e)}), 500
