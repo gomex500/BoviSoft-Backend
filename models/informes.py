@@ -1,6 +1,6 @@
 from datetime import datetime
 
-##modelo de objeto alertas
+##modelo de objeto Informes
 class InformesModel:
     def __init__(self, data):
         self.idUsuario = data.get('idUsuario', '')
