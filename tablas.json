@@ -82,7 +82,7 @@
     "leido": "boolean"
   }
 
-"foto":{
+"foro":{
     "_id": "ObjectId",
     "titulo": "string",
     "contenido": "string",
