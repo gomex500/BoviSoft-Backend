@@ -3,7 +3,8 @@ from controllers.jwt import validar_token
 from configs.conecction import collections
 from controllers.user import (
     obtener_usuarios,
-    obtener_usuario
+    obtener_usuario,
+    obtener_email
 )
 
 #inicalizando ruta
@@ -27,3 +28,8 @@ def obtener_usuarios_ruta():
 @user_routes.route('/user/<id>', methods=['GET'])
 def obtener_usuario_ruta(id):
     return obtener_usuario(collections('usuarios'), id)
+
+#ruta mostrar usuario por el correo
+@user_routes.route('/email/<email>', methods=['GET'])
+def obtener_email_ruta(email):
+    return obtener_email(collections('usuarios'), email)

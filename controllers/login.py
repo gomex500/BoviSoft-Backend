@@ -25,27 +25,27 @@ def enviar_correo_verificacion(correo_destinatario, nombre, apellido):
         to=correo_destinatario,
         subject="Verificación de registro",
         contents=f"""\
-<html>
-  <body>
-    <h1>Verificación de registro</h1>
-    <p>Hola {nombre} {apellido}, gracias por registrarte!</p>
-    <img src='https://st2.depositphotos.com/1765488/5294/i/450/depositphotos_52940845-stock-photo-herd-of-cows-at-summer.jpg'/>
-  </body>
-</html>
-""")
+            <html>
+            <body>
+                <h1>Verificación de registro</h1>
+                <p>Hola {nombre} {apellido}, gracias por registrarte!</p>
+                <img src='https://st2.depositphotos.com/1765488/5294/i/450/depositphotos_52940845-stock-photo-herd-of-cows-at-summer.jpg'/>
+            </body>
+            </html>
+            """)
 
     yagR.send(
         to=CORREO_REMITENTE,
         subject="Verificación de registro",
         contents=f"""\
-<html>
-  <body>
-    <h1>Verificación de registro de usuarios</h1>
-    <p>Felicidades, se ha registrado un usuario nuevo: {nombre} {apellido}</p>
-    <img src='https://st2.depositphotos.com/1765488/5294/i/450/depositphotos_52940845-stock-photo-herd-of-cows-at-summer.jpg'/>
-  </body>
-</html>
-""")
+            <html>
+            <body>
+                <h1>Verificación de registro de usuarios</h1>
+                <p>Felicidades, se ha registrado un usuario nuevo: {nombre} {apellido}</p>
+                <img src='https://st2.depositphotos.com/1765488/5294/i/450/depositphotos_52940845-stock-photo-herd-of-cows-at-summer.jpg'/>
+            </body>
+            </html>
+            """)
 
 ##funcion para validar si el correo existe
 def validacion_gmail(coll, email):

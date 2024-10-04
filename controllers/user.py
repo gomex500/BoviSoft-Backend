@@ -32,3 +32,20 @@ def obtener_usuario(collections, id):
         response = jsonify({"menssage":"error de peticion"})
         response.status = 401
         return response
+
+#controlador mostrar usuario por email
+def obtener_email(collections, email):
+    try:
+        doc = collections.find_one({'email': email})
+        if doc:
+            user_data = UserModel(doc).__dict__
+            user_data['_id'] = str(doc['_id'])
+            return jsonify(user_data)
+        else:
+            response = jsonify({"message": "Correo no existe"})
+            response.status_code = 404
+            return response
+    except Exception as e:
+        response = jsonify({"message": "Error al buscar usuario por correo", "error": str(e)})
+        response.status_code = 500
+        return response
