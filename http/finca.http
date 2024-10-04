@@ -1,0 +1,28 @@
+@api = http://127.0.0.1:5000
+
+@api2 = https://bovinsoft-backend.onrender.com/
+
+###
+GET {{api}}
+
+### ingresar finca
+POST {{api}}/finca
+Content-Type: application/json
+
+{
+    "nombre":"Rancho El juan",
+    "image":"awfswgrger",
+    "direccion":"km 150 carretera al rama",
+    "coordenadas":{
+        "latitud": "12.12345",
+        "longitud": "-86.12345"
+    },
+    "tamano":"3435",
+    "recursosN":[
+        "agua",
+        "bosques",
+        "pastos"
+    ],
+    "descripcion":"df bmsadcv awkerklewrqw",
+    "idUsuario":"66ff6c787a81ade5258dc6e6",
+}
