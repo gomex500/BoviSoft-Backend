@@ -1,10 +1,10 @@
 from flask import Flask
 from flask_cors import CORS
 from configs.config import DEBUG, PORT
-from routes.home import home
-from routes.login import login_routes
-from routes.user import user_routes
-from routes.finca import finca_routes
+from routes.home_route import home
+from routes.login_route import login_routes
+from routes.user_route import user_routes
+from routes.finca_route import finca_routes
 
 ##inicializando servidor
 app = Flask(__name__)

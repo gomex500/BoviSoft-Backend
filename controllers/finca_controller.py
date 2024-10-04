@@ -1,7 +1,7 @@
 from flask import request, jsonify
 from datetime import datetime
 from bson import ObjectId
-from models.finca import FincaModel
+from models.Finca import FincaModel
 import json
 
 

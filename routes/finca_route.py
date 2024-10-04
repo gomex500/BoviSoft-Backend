@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from controllers.jwt import validar_token
 from configs.conecction import collections
-from controllers.finca import (
+from controllers.finca_controller import (
     insertar_finca,
     obtener_finca,
     obtener_fincas,

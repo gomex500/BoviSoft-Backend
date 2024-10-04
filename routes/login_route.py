@@ -1,7 +1,7 @@
 from crypt import methods
 from flask import Blueprint
 from configs.conecction import collections
-from controllers.login import signin, login
+from controllers.login_controller import signin, login
 
 ##inicializando ruta login y registro
 login_routes = Blueprint('login_routes', __name__)

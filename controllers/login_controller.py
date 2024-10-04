@@ -1,7 +1,7 @@
 import json
 import bcrypt
 from flask import request, jsonify
-from models.user import UserModel
+from models.User import UserModel
 from controllers.jwt import crear_token
 import smtplib
 from email.mime.text import MIMEText

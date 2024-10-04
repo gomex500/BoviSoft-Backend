@@ -2,7 +2,7 @@ from datetime import datetime
 from urllib import response
 from flask import request, jsonify
 from bson import ObjectId
-from models.user import UserModel
+from models.User import UserModel
 import json
 import bcrypt
 

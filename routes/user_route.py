@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from controllers.jwt import validar_token
 from configs.conecction import collections
-from controllers.user import (
+from controllers.user_controller import (
     obtener_usuarios,
     obtener_usuario,
     obtener_email,
