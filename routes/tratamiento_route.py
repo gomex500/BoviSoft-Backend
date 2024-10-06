@@ -3,7 +3,6 @@ from controllers.jwt import validar_token
 from configs.conecction import collections
 from controllers.tratamientos_controller import (
     actualizar_tratamieto,
-    insertar_chatbot_ruta,
     insertar_tratamiento,
     obtener_tratamientos,
     obtener_tratmiento,
@@ -11,10 +10,10 @@ from controllers.tratamientos_controller import (
 )
 
 #inicalizando ruta
-taratmiento_routes = Blueprint('taratmiento_routes', __name__)
+tratamiento_routes = Blueprint('tratamiento_routes', __name__)
 
 ##validando token
-@taratmiento_routes.before_request
+@tratamiento_routes.before_request
 def verificar_token():
     try:
         token = request.headers['Authorization'].split(" ")[1]
@@ -23,26 +22,26 @@ def verificar_token():
         return jsonify({"Mensaje":"Error de autenticacion, no estas autorizado"})
 
 #ruta crear tratmiento
-@taratmiento_routes.route('/tratmiento', methods=['POST'])
+@tratamiento_routes.route('/tratamiento', methods=['POST'])
 def insertar_tratmiento_ruta():
-    return insertar_tratamiento(collections('tratmiento'))
+    return insertar_tratamiento(collections('tratamiento'))
 
 # #ruta mostrar tratmientos por usuario
-# @taratmiento_routes.route('/tratmientos/<idUsuario>', methods=['GET'])
+# @tratamiento_routes.route('/tratmientos/<idUsuario>', methods=['GET'])
 # def obtener_tratmiento_ruta(idUsuario):
-#     return obtener_tratamientos(collections('tratmiento'), idUsuario)
+#     return obtener_tratamientos(collections('tratamiento'), idUsuario)
 
 #ruta mostrar tratmiento por id
-@taratmiento_routes.route('/chat/<id>', methods=['GET'])
+@tratamiento_routes.route('/tratamiento/<id>', methods=['GET'])
 def obtener_tratmiento_id_ruta(id):
-    return obtener_tratmiento(collections('tratmiento'), id)
+    return obtener_tratmiento(collections('tratamiento'), id)
 
 #ruta eliminar tratmiento
-@taratmiento_routes.route('/chat/<id>', methods=['DELETE'])
+@tratamiento_routes.route('/tratamiento/<id>', methods=['DELETE'])
 def eliminar_tratmiento_ruta(id):
-    return eliminar_tratamiento(collections('tratmiento'), id)
+    return eliminar_tratamiento(collections('tratamiento'), id)
 
 #ruta actualizar tratmiento
-@taratmiento_routes.route('/chat/<id>', methods=['PUT'])
+@tratamiento_routes.route('/tratamiento/<id>', methods=['PUT'])
 def actualizar_tratmiento_ruta(id):
-    return actualizar_tratamieto(collections('tratmiento'), id)
+    return actualizar_tratamieto(collections('tratamiento'), id)

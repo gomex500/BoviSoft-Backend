@@ -1,0 +1,25 @@
+@api = http://127.0.0.1:5000
+
+@api2 = https://bovinsoft-backend.onrender.com/
+
+###
+GET {{api}}
+
+### ingresar tratamiento
+POST {{api}}/tratamiento
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJGcmVkZHkiLCJhcGVsbGlkbyI6IkdvbWV6IiwiZmVjaGFfbmFjaW1pZW50byI6IllZWVktTU0tREQiLCJlbWFpbCI6ImdvbWV4Njc5OEBnbWFpbC5jb20iLCJ0ZWxlZm9ubyI6Iis1MDUgODIxODEgNjYzIiwicm9sIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJqdWlnYWxwYSwgY2hvbnRhbGVzIiwidGlwb1N1c2NyaXBjaW9uIjoibWVuc3VhbCIsImV4cCI6MTcyODE2NjY4MX0.Cq3hbZhzUDFl-k4UBqB6FdvBCQ0qllVekv-Tf10ZSEA
+Content-Type: application/json
+
+{
+    "nombre":"asferrg",
+    "tipo":"vacuna",
+    "descripcion":"sergertybert",
+    "periodicidad":"mensual",
+    "dosis":"sergertybert",
+    "fecha":"2022-12-01"
+}
+
+##obtner chat por usuario 
+####
+GET {{api}}/tratamiento/670223c7b36bfd7b01951a9a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJGcmVkZHkiLCJhcGVsbGlkbyI6IkdvbWV6IiwiZmVjaGFfbmFjaW1pZW50byI6IllZWVktTU0tREQiLCJlbWFpbCI6ImdvbWV4Njc5OEBnbWFpbC5jb20iLCJ0ZWxlZm9ubyI6Iis1MDUgODIxODEgNjYzIiwicm9sIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJqdWlnYWxwYSwgY2hvbnRhbGVzIiwidGlwb1N1c2NyaXBjaW9uIjoibWVuc3VhbCIsImV4cCI6MTcyODE2NjY4MX0.Cq3hbZhzUDFl-k4UBqB6FdvBCQ0qllVekv-Tf10ZSEA
