@@ -25,7 +25,7 @@ def obtener_alertas(collections, idUsuario):
             alerta = AlertasModel(doc).__dict__
             alerta['_id'] = str(doc['_id'])
             alertas.append(alerta)
-        return jsonify(alerta)
+        return jsonify(alertas)
     except Exception as e:
         response = jsonify({"message": "Error de petición", "error": str(e)})
         response.status_code = 500
