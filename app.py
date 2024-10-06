@@ -10,6 +10,8 @@ from routes.finca_route import finca_routes
 from routes.chatbot_route import chatbot_routes
 from routes.alertas_route import alertas_routes
 from routes.informes_route import informes_routes
+from routes.bovino_route import bovino_routes
+from routes.historialSalud import historialSalud_routes
 
 ##inicializando servidor
 app = Flask(__name__)
@@ -27,6 +29,8 @@ app.register_blueprint(finca_routes)
 app.register_blueprint(chatbot_routes)
 app.register_blueprint(alertas_routes)
 app.register_blueprint(informes_routes)
+app.register_blueprint(historialSalud_routes)
+app.register_blueprint(bovino_routes)
 
 if __name__ == '__main__':
     app.run(debug=DEBUG, port=PORT)

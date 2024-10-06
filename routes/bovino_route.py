@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from controllers.jwt import validar_token
 from configs.conecction import collections
-from controllers.bovino import (
+from controllers.bovino_controller import (
     insertar_bovino,
     obtener_bovino,
     obtener_bovinosByFarm,
