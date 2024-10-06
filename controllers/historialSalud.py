@@ -1,7 +1,7 @@
 from flask import request, jsonify
 from datetime import datetime
 from bson import ObjectId
-from models.bovino import BovinoModel
+from models.historialSalud import HistorialSalud
 import json
 
 def crear_historial(collections):
