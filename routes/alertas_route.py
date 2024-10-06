@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from controllers.jwt import validar_token
 from configs.conecction import collections
-from controllers.alertas_controllers import (
+from controllers.alertas_controller import (
     insertar_alerta,
     obtener_alertas,
     obtener_alerta,
