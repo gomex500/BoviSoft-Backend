@@ -5,6 +5,7 @@ class BovinoModel:
     def __init__(self, data):
         self.fincaId = ObjectId(data.get('fincaId')) 
         self.nombre = data.get('nombre', '')
+        self.image = data.get('image', '')
         self.raza = data.get('raza', '')
         self.edad = data.get('edad', '')
         self.peso = data.get('peso', '')

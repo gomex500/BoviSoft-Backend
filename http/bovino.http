@@ -1,0 +1,33 @@
+@api = http://127.0.0.1:5000
+
+@api2 = https://bovinsoft-backend.onrender.com/
+
+###
+GET {{api}}
+
+### registro de usuario
+POST {{api}}/bovino
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJqdWFuIiwiYXBlbGxpZG8iOiJnb256YWxleiIsImZlY2hhX25hY2ltaWVudG8iOiJZWVlZLU1NLUREIiwiZW1haWwiOiJnb21lemZyZWRkeTg4NkBnbWFpbC5jb20iLCJ0ZWxlZm9ubyI6Iis1MDUgODI4MSA2NjMiLCJyb2wiOiJhZG1pbiIsImRpcmVjY2lvbiI6Imp1aWdhbHBhLCBjaG9udGFsZXMiLCJ0aXBvU3VzY3JpcGNpb24iOiJtZW5zdWFsIiwiZXhwIjoxNzI5NDIxNTI5fQ.kalntEwAY9v52KUm4dQpZ_6JDfc9X2SrdE3LQD6n0yg
+Content-Type: application/json
+
+{
+    "_id": "6713b152ffe35c5e70d86f8c",
+    "codigo": "FSM-GND001",
+    "consecutivo": 1,
+    "edad": "",
+    "estadoSalud": "",
+    "fechaNacimiento": null,
+    "fechaRegistro": "Sat, 19 Oct 2024 13:17:06 GMT",
+    "fincaId": "6713a71affe35c5e70d86f8a",
+    "genero": "macho",
+    "nombre": "Vovino #101",
+    "peso": "4567",
+    "raza": "Brahman",
+    "tipo": "carne",
+    "image":"https://enciclopediaiberoamericana.com/wp-content/uploads/2022/01/vaca.jpg"
+  }
+
+
+###
+GET https://bovinsoft-backend.onrender.com/bovino/byFarm/6713a71affe35c5e70d86f8a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJqdWFuIiwiYXBlbGxpZG8iOiJnb256YWxleiIsImZlY2hhX25hY2ltaWVudG8iOiJZWVlZLU1NLUREIiwiZW1haWwiOiJnb21lemZyZWRkeTg4NkBnbWFpbC5jb20iLCJ0ZWxlZm9ubyI6Iis1MDUgODI4MSA2NjMiLCJyb2wiOiJhZG1pbiIsImRpcmVjY2lvbiI6Imp1aWdhbHBhLCBjaG9udGFsZXMiLCJ0aXBvU3VzY3JpcGNpb24iOiJtZW5zdWFsIiwiZXhwIjoxNzI5NDIxNTI5fQ.kalntEwAY9v52KUm4dQpZ_6JDfc9X2SrdE3LQD6n0yg

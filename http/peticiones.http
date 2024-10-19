@@ -10,15 +10,15 @@ POST {{api}}/signin
 Content-Type: application/json
 
 {
-    "nombre":"Freddy",
-    "apellido":"Gomez",
+    "nombre":"juan",
+    "apellido":"gonzalez",
     "fecha_nacimiento":"YYYY-MM-DD",
-    "telefono":"+505 82181 663",
+    "telefono":"+505 8281 663",
     "tipoSuscripcion":"mensual",
     "direccion":"juigalpa, chontales",
     "rol":"admin",
-    "email":"ddfdfdf@gmail.com",
-    "password":"1234",
+    "email":"gomezfreddy886@gmail.com",
+    "password":"1234ff",
     "image": "zdfgdfghfdhgh"
 }
 
@@ -35,7 +35,7 @@ Content-Type: application/json
 ##obtner usuarios
 ####
 GET {{api}}/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJGcmVkZHkiLCJhcGVsbGlkbyI6IkdvbWV6IiwiZmVjaGFfbmFjaW1pZW50byI6IllZWVktTU0tREQiLCJlbWFpbCI6ImdvbWV4Njc5OEBnbWFpbC5jb20iLCJ0ZWxlZm9ubyI6Iis1MDUgODIxODEgNjYzIiwicm9sIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJqdWlnYWxwYSwgY2hvbnRhbGVzIiwidGlwb1N1c2NyaXBjaW9uIjoibWVuc3VhbCIsImV4cCI6MTcyODE2NjY4MX0.Cq3hbZhzUDFl-k4UBqB6FdvBCQ0qllVekv-Tf10ZSEA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJqdWFuIiwiYXBlbGxpZG8iOiJnb256YWxleiIsImZlY2hhX25hY2ltaWVudG8iOiJZWVlZLU1NLUREIiwiZW1haWwiOiJnb21lemZyZWRkeTg4NkBnbWFpbC5jb20iLCJ0ZWxlZm9ubyI6Iis1MDUgODI4MSA2NjMiLCJyb2wiOiJhZG1pbiIsImRpcmVjY2lvbiI6Imp1aWdhbHBhLCBjaG9udGFsZXMiLCJ0aXBvU3VzY3JpcGNpb24iOiJtZW5zdWFsIiwiZXhwIjoxNzI5NDIxNTI5fQ.kalntEwAY9v52KUm4dQpZ_6JDfc9X2SrdE3LQD6n0yg
 
 
 ### "id": "66ff6c787a81ade5258dc6e6",
