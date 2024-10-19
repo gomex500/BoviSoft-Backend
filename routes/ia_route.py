@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from controllers.jwt import validar_token
-from controllers.ia_controller import generar_contenido
+# from controllers.ia_controller import generar_contenido
 
 # Inicializando la ruta
 gemini_routes = Blueprint('gemini_routes', __name__)
@@ -14,7 +14,7 @@ gemini_routes = Blueprint('gemini_routes', __name__)
 #     except:
 #         return jsonify({"Mensaje": "Error de autenticación, no estás autorizado"}), 401
 
-# Ruta para generar contenido con Gemini
-@gemini_routes.route('/ia', methods=['POST'])
-def generar_contenido_ruta():
-    return generar_contenido()
+# # Ruta para generar contenido con Gemini
+# @gemini_routes.route('/ia', methods=['POST'])
+# def generar_contenido_ruta():
+#     return generar_contenido()
