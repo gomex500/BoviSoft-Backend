@@ -177,7 +177,8 @@ def actualizar_bovino(collections, id):
             update_data['tipo'] = nuevos_datos['tipo']
         if 'estadoSalud' in nuevos_datos:
             update_data['estadoSalud'] = nuevos_datos['estadoSalud']
-
+        if 'image' in nuevos_datos:
+            update_data['image'] = nuevos_datos['image']
         # Siempre actualiza la fecha de modificación
         update_data['update_at'] = datetime.now()
 
