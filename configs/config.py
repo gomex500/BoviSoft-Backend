@@ -8,5 +8,5 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 PORT  = config('PORT', default=5000, cast=int)
 MONGO_URI = config('MONGO_URI')
 SECRET_KEY = config('SECRET_KEY')
-GEMINI_API_KEY = config('keyGeminis')
-GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent'
+# GEMINI_API_KEY = config('keyGeminis')
+# GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent'
