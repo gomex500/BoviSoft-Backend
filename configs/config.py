@@ -1,11 +1,10 @@
 from ctypes import cast
-from distutils.debug import DEBUG
 from email.policy import default
 from decouple import config
 
 ##configurando variables de entorno
-DEBUG = config('DEBUG', default=False, cast=bool)
-PORT  = config('PORT', default=5000, cast=int)
+DEBUG = True  # O False, dependiendo de tu necesidad
+PORT = 5000   # O el puerto que estés utilizando
 MONGO_URI = config('MONGO_URI')
 SECRET_KEY = config('SECRET_KEY')
 # GEMINI_API_KEY = config('keyGeminis')

@@ -1,4 +1,3 @@
-from crypt import methods
 from flask import Blueprint
 from configs.conecction import collections
 from controllers.login_controller import signin, login
