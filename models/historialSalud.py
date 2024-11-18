@@ -1,14 +1,30 @@
 from datetime import datetime
-from bson import ObjectId 
+from bson import ObjectId
 
-##modelo de objeto Finca
-class HistorialSalud:
-    def __init__(self, data):
-        self.bovinoId = ObjectId(data.get('bovinoId')) 
-        self.evento = data.get('evento', '')
-        self.descripcion = data.get('descripcion', '')
-        self.fecha = data.get('fecha', datetime.now())
-        self.nombreVeterinario = data.get('nombreVeterinario', '')
-        self.observaciones = data.get('observaciones', '')
-        self.create_at = data.get('create_at', datetime.now())
-        self.update_at = data.get('update_at', datetime.now())
+class HistorialSanitario:
+    def __init__(self, bovinoId, fechaRealizada, actividad, productoUsado=None, dosis=None, veterinario=None, observaciones=None, costoReal=None):
+        self._id = ObjectId()  # MongoDB genera un ID único automáticamente
+        self.bovinoId = ObjectId(bovinoId)  # ID del bovino
+        self.fechaRealizada = fechaRealizada
+        self.actividad = actividad
+        self.productoUsado = productoUsado
+        self.dosis = dosis
+        self.veterinario = veterinario
+        self.observaciones = observaciones
+        self.costoReal = costoReal
+        self.fechaCreacion = datetime.utcnow()  # Fecha de creación en UTC
+
+    def to_dict(self):
+        return {
+            "_id": self._id,
+            "bovinoId": self.bovinoId,
+            "fechaRealizada": self.fechaRealizada,
+            "actividad": self.actividad,
+            "productoUsado": self.productoUsado,
+            "dosis": self.dosis,
+            "veterinario": self.veterinario,
+            "observaciones": self.observaciones,
+            "costoReal": self.costoReal,
+            "fechaCreacion": self.fechaCreacion
+        }
+# actividad ENUM('Vacunación', 'Examen Médico', 'Otro') NOT NULL,
