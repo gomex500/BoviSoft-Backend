@@ -93,13 +93,13 @@ def actualizar_Interaccion_post(collectionsForo, collectionsPostInteraccion):
         result_interaccion = collectionsPostInteraccion.find_one({'idUsuario': data['idUsuario'], 'idForo': data['idForo'], 'tipoInteraccion': data['tipoInteraccion']})
         if result_interaccion == None:
           id = collectionsPostInteraccion.insert_one(post_interaccion_instance.__dict__).inserted_id
-          foro_model.interaciones[post_interaccion_instance.tipoInteraccion] = foro_model.interaciones[post_interaccion_instance.tipoInteraccion] + 1
+          foro_model.interacciones[post_interaccion_instance.tipoInteraccion] = foro_model.interacciones[post_interaccion_instance.tipoInteraccion] + 1
           collectionsForo.update_one({'_id': ObjectId(data['idForo'])}, {"$set": foro_model.__dict__})
           return jsonify({'id': str(id)})
         else:
           estado = post_interaccion_instance.estado
           tipoInteraccion = post_interaccion_instance.tipoInteraccion
-          foro_model.interaciones[tipoInteraccion] = foro_model.interaciones[tipoInteraccion] + 1 if estado else foro_model.interaciones[tipoInteraccion] - 1
+          foro_model.interacciones[tipoInteraccion] = foro_model.interacciones[tipoInteraccion] + 1 if estado else foro_model.interacciones[tipoInteraccion] - 1
           collectionsPostInteraccion.update_one({'idUsuario': data['idUsuario'], 'idForo': data['idForo']}, {"$set": post_interaccion_instance.__dict__})
           collectionsForo.update_one({'_id': ObjectId(data['idForo'])}, {"$set": foro_model.__dict__})
           return jsonify(data)

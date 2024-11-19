@@ -8,7 +8,7 @@ class ComentariosModel:
         self.avatar = data.get('avatar', '')
         self.idForo = data.get('idForo', '')
         self.contenido = data.get('contenido', '')
-        self.interaciones = data.get('interaciones', {})
+        self.interacciones = data.get('interacciones', {})
         self.fechaCreacion = data.get('fechaCreacion', '')
         self.create_at = data.get('create_at', datetime.now())
         self.update_at = data.get('update_at', datetime.now())

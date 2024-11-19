@@ -11,7 +11,7 @@ class ForoModel:
         self.contenido = data.get('contenido', '')
         self.fechaCreacion = data.get('fechaCreacion', '')
         self.categoria = data.get('categoria', '') ## Ej: "salud", "producción", "general"
-        self.interaciones = data.get('interaciones', {})
+        self.interacciones = data.get('interacciones', {})
         self.create_at = data.get('create_at', datetime.now())
         self.update_at = data.get('update_at', datetime.now())
 

@@ -103,19 +103,19 @@ def actualizar_Interaccion_comentario(collectionsComentario, collectionsCommentI
         comment = collectionsComentario.find_one({'_id': ObjectId(data['idComment'])})
         comment_model = ComentariosModel(comment)
         tipoInteraccion = comment_interaccion_instance.tipo
-        countInteraccion = comment_model.interaciones[tipoInteraccion]
+        countInteraccion = comment_model.interacciones[tipoInteraccion]
         
         result_interaccion = collectionsCommentInteraccion.find_one({'idUsuario': data['idUsuario'], 'idComment': data['idComment'], 'tipo': data['tipo']})
         
         if result_interaccion == None:
           id = collectionsCommentInteraccion.insert_one(comment_interaccion_instance.__dict__).inserted_id
-          comment_model.interaciones[tipoInteraccion] = countInteraccion + 1
+          comment_model.interacciones[tipoInteraccion] = countInteraccion + 1
           collectionsComentario.update_one({'_id': ObjectId(data['idComment'])}, {"$set": comment_model.__dict__})
           return jsonify(str(id))
         else:
           estado = comment_interaccion_instance.estado
           
-          comment_model.interaciones[tipoInteraccion] = countInteraccion + 1 if estado else countInteraccion - 1
+          comment_model.interacciones[tipoInteraccion] = countInteraccion + 1 if estado else countInteraccion - 1
           collectionsCommentInteraccion.update_one({"_id": ObjectId(result_interaccion['_id'])}, {"$set": comment_interaccion_instance.__dict__})
           collectionsComentario.update_one({'_id': ObjectId(data['idComment'])}, {"$set": comment_model.__dict__})
           
