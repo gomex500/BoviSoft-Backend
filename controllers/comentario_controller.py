@@ -20,7 +20,8 @@ def obtener_comentarios_por_foro(collections,collectionsInteraccion, foro_id):
     try:
         user = g.current_user
         comentarios = []
-        for doc in collections.find({"idForo": ObjectId(foro_id)}):
+        comentariosGet = collections.find({"idForo": foro_id})
+        for doc in comentariosGet:
             comentario = ComentariosModel(doc).__dict__
             comentario['id'] = str(doc['_id'])
             

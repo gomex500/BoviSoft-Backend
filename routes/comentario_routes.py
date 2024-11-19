@@ -32,7 +32,7 @@ def insertar_comentario_ruta():
 #ruta mostrar comentarios por foro
 @comentario_routes.route('/comentarios/<foro_id>', methods=['GET'])
 def obtener_comentarios_por_foro_ruta(foro_id):
-    return obtener_comentarios_por_foro(collections('comentarios'), foro_id)
+    return obtener_comentarios_por_foro(collections('comentarios'), collections('interaccionesComment'), foro_id)
 
 #ruta mostrar comentarios
 @comentario_routes.route('/comentarios', methods=['GET'])
