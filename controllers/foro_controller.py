@@ -38,6 +38,8 @@ def obtener_foros(collectionsForo, collectionsPostInteraccion):
               "reports": iReportedForo is not None
             }
             
+            foro["comentarios"] = []
+            
             foros.append(foro)
         return jsonify(foros)
     except Exception as e:
