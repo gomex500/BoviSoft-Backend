@@ -88,15 +88,22 @@ def actualizar_Interaccion_post(collectionsForo, collectionsPostInteraccion):
         data = json.loads(request.data)
         print(data)
         print("print 1")
+        post_interaccion_instance_dist = PostInteractionModel(data).__dict__
         post_interaccion_instance = PostInteractionModel(data)
         foro = collectionsForo.find_one({'_id': ObjectId(data['idForo'])})
         foro_model = ForoModel(foro)
+        id_usuario = post_interaccion_instance_dist['idUsuario']
+        id_foro = post_interaccion_instance_dist['idForo']
+        tipo_interaccion = post_interaccion_instance_dist['tipoInteraccion']
+        
         print(foro_model)
         print("print 2")
-        print(data["tipoInteraccion"])
-        print(data["idForo"])
-        print(data["idUsuario"])
-        result_interaccion = collectionsPostInteraccion.find_one({'idUsuario': data['idUsuario'], 'idForo': data['idForo'], 'tipoInteraccion': data['tipoInteraccion']})
+        print(id_usuario)
+        print(id_foro)
+        print(tipo_interaccion)
+        
+        result_interaccion = collectionsPostInteraccion.find_one({'idUsuario': id_usuario, 'idForo': id_foro, 'tipoInteraccion': tipo_interaccion})
+                
         print("print 5")
         if result_interaccion == None:
           print("print 3")
