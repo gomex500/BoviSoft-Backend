@@ -93,7 +93,11 @@ def actualizar_Interaccion_post(collectionsForo, collectionsPostInteraccion):
         foro_model = ForoModel(foro)
         print(foro_model)
         print("print 2")
+        print(data["tipoInteraccion"])
+        print(data["idForo"])
+        print(data["idUsuario"])
         result_interaccion = collectionsPostInteraccion.find_one({'idUsuario': data['idUsuario'], 'idForo': data['idForo'], 'tipoInteraccion': data['tipoInteraccion']})
+        print("print 5")
         if result_interaccion == None:
           print("print 3")
           id = collectionsPostInteraccion.insert_one(post_interaccion_instance.__dict__).inserted_id
