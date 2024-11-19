@@ -86,33 +86,25 @@ def eliminar_foro(collections, id):
 def actualizar_Interaccion_post(collectionsForo, collectionsPostInteraccion):
     try:
         data = json.loads(request.data)
-        print(data)
-        print("print 1")
+        
         post_interaccion_instance_dist = PostInteractionModel(data).__dict__
         post_interaccion_instance = PostInteractionModel(data)
+        
         foro = collectionsForo.find_one({'_id': ObjectId(data['idForo'])})
         foro_model = ForoModel(foro)
+        
         id_usuario = post_interaccion_instance_dist['idUsuario']
         id_foro = post_interaccion_instance_dist['idForo']
         tipo_interaccion = post_interaccion_instance_dist['tipoInteraccion']
         
-        print(foro_model)
-        print("print 2")
-        print(id_usuario)
-        print(id_foro)
-        print(tipo_interaccion)
-        
         result_interaccion = collectionsPostInteraccion.find_one({'idUsuario': id_usuario, 'idForo': id_foro, 'tipoInteraccion': tipo_interaccion})
-                
-        print("print 5")
+
         if result_interaccion == None:
-          print("print 3")
           id = collectionsPostInteraccion.insert_one(post_interaccion_instance.__dict__).inserted_id
           foro_model.interacciones[post_interaccion_instance.tipoInteraccion] = foro_model.interacciones[post_interaccion_instance.tipoInteraccion] + 1
           collectionsForo.update_one({'_id': ObjectId(data['idForo'])}, {"$set": foro_model.__dict__})
           return jsonify({'id': str(id)})
         else:
-          print("print 4")
           estado = post_interaccion_instance.estado
           tipoInteraccion = post_interaccion_instance.tipoInteraccion
           foro_model.interacciones[tipoInteraccion] = foro_model.interacciones[tipoInteraccion] + 1 if estado else foro_model.interacciones[tipoInteraccion] - 1
@@ -121,5 +113,5 @@ def actualizar_Interaccion_post(collectionsForo, collectionsPostInteraccion):
           return jsonify({'estado': True })
     except:
         response = jsonify({"menssage":"Error al actualizar Interacciones"})
-        response.status = 401
+        response.status = 500
         return response

@@ -14,14 +14,14 @@ from controllers.foro_controller import (
 foro_routes = Blueprint('foro_routes', __name__)
 
 ##validando token
-# @foro_routes.before_request
-# def verificar_token():
-#     try:
-#         token = request.headers['Authorization'].split(" ")[1]
-#         payload = validar_token(token, output=True)
-#         g.current_user = payload
-#     except:
-#         return jsonify({"Mensaje":"Error de autenticacion, no estas autorizado"})
+@foro_routes.before_request
+def verificar_token():
+    try:
+        token = request.headers['Authorization'].split(" ")[1]
+        payload = validar_token(token, output=True)
+        g.current_user = payload
+    except:
+        return jsonify({"Mensaje":"Error de autenticacion, no estas autorizado"})
 
 #ruta crear foro
 @foro_routes.route('/foro', methods=['POST'])
@@ -31,9 +31,6 @@ def insertar_foro_ruta():
 #ruta mostrar foros
 @foro_routes.route('/foros', methods=['GET'])
 def obtener_foros_ruta():
-    token = request.headers['Authorization'].split(" ")[1]
-    payload = validar_token(token, output=True)
-    g.current_user = payload
     return obtener_foros(collections('foros'), collections('interaccionesPost'))
 
 #ruta mostrar foro por id
@@ -53,5 +50,4 @@ def eliminar_foro_ruta(id):
   
 @foro_routes.route('/interacciones/publicaciones', methods=['POST'])
 def actualizar_interaccion_post_ruta():
-    print("@actualizar_interaccion_post_ruta")
     return actualizar_Interaccion_post(collections('foros'), collections('interaccionesPost'))
