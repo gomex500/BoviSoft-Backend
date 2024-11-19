@@ -53,4 +53,5 @@ def eliminar_foro_ruta(id):
   
 @foro_routes.route('/interacciones/publicaciones', methods=['POST'])
 def actualizar_interaccion_post_ruta():
+    print("@actualizar_interaccion_post_ruta")
     return actualizar_Interaccion_post(collections('foros'), collections('interaccionesPost'))
