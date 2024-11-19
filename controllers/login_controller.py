@@ -83,6 +83,7 @@ def signin(collections):
         #insertando password y usuario a la db
         id = collections.insert_one(user_instace.__dict__).inserted_id
         user_data = {
+            "id": user_instace._id,
             "nombre": user_instace.nombre,
             "apellido": user_instace.apellido,
             "fecha_nacimiento": user_instace.fecha_nacimiento,
@@ -117,6 +118,7 @@ def login(collections):
         # Obtener el documento del usuario
         user_doc = collections.find_one({'email': user_instance.email})
         user_data = {
+            "id": str(user_doc['_id']),
             "nombre": user_doc['nombre'],
             "apellido": user_doc['apellido'],
             "fecha_nacimiento": user_doc['fecha_nacimiento'],

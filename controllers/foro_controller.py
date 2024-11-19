@@ -1,7 +1,10 @@
-from flask import request, jsonify
+from flask import request, jsonify, g
 from datetime import datetime
 from bson import ObjectId
 from models.Foro import ForoModel
+from models.Comentarios import ComentariosModel
+from models.PostInteraction import PostInteractionModel
+from models.CommentInteraction import CommentInteractionModel
 import json
 
 def insertar_foro(collections):
@@ -16,12 +19,25 @@ def insertar_foro(collections):
         return response
 
 ##obtener todas las foros
-def obtener_foros(collections):
+def obtener_foros(collectionsForo, collectionsPostInteraccion):
     try:
+        
+        user = g.current_user
         foros = []
-        for doc in collections.find():
+        for doc in collectionsForo.find():
             foro = ForoModel(doc).__dict__
-            foro['_id'] = str(doc['_id'])
+            foro['id'] = str(doc['_id'])
+            
+            iLikedItForo = collectionsPostInteraccion.find_one({"idForo": foro['id'], "idUsuario": user['id'], "tipoInteraccion": "likes"})
+            iDidNotLikeForo = collectionsPostInteraccion.find_one({"idForo": foro['id'], "idUsuario": user['id'], "tipoInteraccion": "dislikes"})
+            iReportedForo = collectionsPostInteraccion.find_one({"idForo": foro['id'], "idUsuario": user['id'], "tipoInteraccion": "reports"})
+            
+            foro["userInteractions"] = {
+              "likes": iLikedItForo is not None,
+              "dislikes": iDidNotLikeForo is not None,
+              "reports": iReportedForo is not None
+            }
+            
             foros.append(foro)
         return jsonify(foros)
     except Exception as e:
@@ -65,3 +81,29 @@ def eliminar_foro(collections, id):
         response = jsonify({"menssage":"Error al Eliminar"})
         response.status = 401
         return response 
+      
+      
+def actualizar_Interaccion_post(collectionsForo, collectionsPostInteraccion):
+    try:
+        data = json.loads(request.data)
+        post_interaccion_instance = PostInteractionModel(data)
+        foro = collectionsForo.find_one({'_id': ObjectId(data['idForo'])})
+        foro_model = ForoModel(foro)
+        
+        result_interaccion = collectionsPostInteraccion.find_one({'idUsuario': data['idUsuario'], 'idForo': data['idForo'], 'tipoInteraccion': data['tipoInteraccion']})
+        if result_interaccion == None:
+          id = collectionsPostInteraccion.insert_one(post_interaccion_instance.__dict__).inserted_id
+          foro_model.interaciones[post_interaccion_instance.tipoInteraccion] = foro_model.interaciones[post_interaccion_instance.tipoInteraccion] + 1
+          collectionsForo.update_one({'_id': ObjectId(data['idForo'])}, {"$set": foro_model.__dict__})
+          return jsonify({'id': str(id)})
+        else:
+          estado = post_interaccion_instance.estado
+          tipoInteraccion = post_interaccion_instance.tipoInteraccion
+          foro_model.interaciones[tipoInteraccion] = foro_model.interaciones[tipoInteraccion] + 1 if estado else foro_model.interaciones[tipoInteraccion] - 1
+          collectionsPostInteraccion.update_one({'idUsuario': data['idUsuario'], 'idForo': data['idForo']}, {"$set": post_interaccion_instance.__dict__})
+          collectionsForo.update_one({'_id': ObjectId(data['idForo'])}, {"$set": foro_model.__dict__})
+          return jsonify(data)
+    except:
+        response = jsonify({"menssage":"Error al actualizar Interacciones"})
+        response.status = 401
+        return response
