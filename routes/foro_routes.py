@@ -7,7 +7,7 @@ from controllers.foro_controller import (
     obtener_foro,
     actualizar_foro,
     eliminar_foro,
-    actualizar_Interaccion_post
+    actualizar_interaccion_post
 )
 
 #inicalizando ruta
@@ -50,4 +50,4 @@ def eliminar_foro_ruta(id):
   
 @foro_routes.route('/interacciones/publicaciones', methods=['POST'])
 def actualizar_interaccion_post_ruta():
-    return actualizar_Interaccion_post(collections('foros'), collections('interaccionesPost'))
+    return actualizar_interaccion_post(collections('foros'), collections('interaccionesPost'))
