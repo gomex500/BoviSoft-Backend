@@ -104,35 +104,48 @@ def eliminar_foro(collections, id):
         return response 
       
       
-def actualizar_Interaccion_post(collectionsForo, collectionsPostInteraccion):
+def actualizar_interaccion_post(collectionsForo, collectionsPostInteraccion):
     try:
-        data = json.loads(request.data)
-        
-        post_interaccion_instance_dist = PostInteractionModel(data).__dict__
-        post_interaccion_instance = PostInteractionModel(data)
-        
-        foro = collectionsForo.find_one({'_id': ObjectId(data['idForo'])})
-        foro_model = ForoModel(foro)
-        
-        id_usuario = post_interaccion_instance_dist['idUsuario']
-        id_foro = post_interaccion_instance_dist['idForo']
-        tipo_interaccion = post_interaccion_instance_dist['tipoInteraccion']
-        
-        result_interaccion = collectionsPostInteraccion.find_one({'idUsuario': id_usuario, 'idForo': id_foro, 'tipoInteraccion': tipo_interaccion})
+        data = request.get_json()
 
-        if result_interaccion == None:
-          id = collectionsPostInteraccion.insert_one(post_interaccion_instance.__dict__).inserted_id
-          foro_model.interacciones[post_interaccion_instance.tipoInteraccion] = foro_model.interacciones[post_interaccion_instance.tipoInteraccion] + 1
-          collectionsForo.update_one({'_id': ObjectId(data['idForo'])}, {"$set": foro_model.__dict__})
-          return jsonify({'id': str(id)})
+        post_interaccion_instance = PostInteractionModel(data)
+        post_interaccion_dict = post_interaccion_instance.__dict__
+
+        foro = collectionsForo.find_one({'_id': ObjectId(data['idForo'])})
+        if not foro:
+            return jsonify({"message": "Foro no encontrado"}), 404
+
+        foro_model = ForoModel(foro)
+
+        id_usuario = post_interaccion_dict['idUsuario']
+        id_foro = post_interaccion_dict['idForo']
+        tipo_interaccion = post_interaccion_dict['tipoInteraccion']
+
+        result_interaccion = collectionsPostInteraccion.find_one({
+            'idUsuario': id_usuario,
+            'idForo': id_foro,
+            'tipoInteraccion': tipo_interaccion
+        })
+
+        if result_interaccion is None:
+            # Insert new interaction
+            inserted_id = collectionsPostInteraccion.insert_one(post_interaccion_dict).inserted_id
+            foro_model.interacciones[tipo_interaccion] += 1
+            collectionsForo.update_one({'_id': ObjectId(id_foro)}, {"$set": foro_model.__dict__})
+            return jsonify({'id': str(inserted_id)})
         else:
-          estado = post_interaccion_instance.estado
-          tipoInteraccion = post_interaccion_instance.tipoInteraccion
-          foro_model.interacciones[tipoInteraccion] = foro_model.interacciones[tipoInteraccion] + 1 if estado else foro_model.interacciones[tipoInteraccion] - 1
-          collectionsPostInteraccion.update_one({'idUsuario': data['idUsuario'], 'idForo': data['idForo']}, {"$set": post_interaccion_instance.__dict__})
-          collectionsForo.update_one({'_id': ObjectId(data['idForo'])}, {"$set": foro_model.__dict__})
-          return jsonify({'estado': True })
-    except:
-        response = jsonify({"menssage":"Error al actualizar Interacciones"})
-        response.status = 500
+            # Update existing interaction
+            estado = post_interaccion_instance.estado
+            foro_model.interacciones[tipo_interaccion] += 1 if estado else -1
+            collectionsPostInteraccion.update_one({
+                'idUsuario': id_usuario,
+                'idForo': id_foro,
+                'tipoInteraccion': tipo_interaccion
+            }, {"$set": post_interaccion_dict})
+            collectionsForo.update_one({'_id': ObjectId(id_foro)}, {"$set": foro_model.__dict__})
+            return jsonify({'estado': True})
+
+    except Exception as e:
+        response = jsonify({"message": "Error al actualizar interacciones", "error": str(e)})
+        response.status_code = 500
         return response
