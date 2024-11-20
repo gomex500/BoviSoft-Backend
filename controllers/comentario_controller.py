@@ -15,32 +15,60 @@ def insertar_comentario(collections):
         response = jsonify({"message": "Error de petición", "error": str(e)})
         response.status_code = 500
         return response
-##obtener todas los comentarios de un foro
-def obtener_comentarios_por_foro(collections,collectionsInteraccion, foro_id):
+
+def obtener_comentarios_por_foro(collections, collectionsInteraccion, foro_id):
     try:
         user = g.current_user
+        if not user or 'id' not in user:
+            return jsonify({"message": "Usuario no autenticado"}), 401
+
+        # Obtener todos los comentarios del foro
+        comentariosGet = list(collections.find({"idForo": foro_id}))
+        if not comentariosGet:
+            return jsonify({"message": "No hay comentarios para este foro"}), 404
+
+        # Extraer los IDs de comentarios para consultar interacciones de manera eficiente
+        comentario_ids = [str(doc['_id']) for doc in comentariosGet]
+
+        # Obtener todas las interacciones relevantes para este usuario y estos comentarios
+        interacciones = list(collectionsInteraccion.find({
+            "idComment": {"$in": comentario_ids},
+            "idUsuario": user['id']
+        }))
+
+        # Mapear interacciones por tipo e ID de comentario
+        interacciones_por_comentario = {}
+        for interaccion in interacciones:
+            comment_id = interaccion["idComment"]
+            if comment_id not in interacciones_por_comentario:
+                interacciones_por_comentario[comment_id] = {}
+            interacciones_por_comentario[comment_id][interaccion["tipo"]] = interaccion.get("estado", False)
+
+        # Construir la respuesta de comentarios
         comentarios = []
-        comentariosGet = collections.find({"idForo": foro_id})
         for doc in comentariosGet:
             comentario = ComentariosModel(doc).__dict__
             comentario['id'] = str(doc['_id'])
-            
-            iLikedItForo = collectionsInteraccion.find_one({"idComment": comentario['id'], "idUsuario": user['id'], "tipo": "likes"})
-            iDidNotLikeForo = collectionsInteraccion.find_one({"idComment": comentario['id'], "idUsuario": user['id'], "tipo": "dislikes"})
-            iReportedForo = collectionsInteraccion.find_one({"idComment": comentario['id'], "idUsuario": user['id'], "tipo": "reports"})
-            
+
+            # Obtener las interacciones del usuario actual con este comentario
+            interacciones_usuario = interacciones_por_comentario.get(comentario['id'], {})
+
             comentario["userInteractions"] = {
-              "likes": iLikedItForo is not None,
-              "dislikes": iDidNotLikeForo is not None,
-              "reports": iReportedForo is not None
+                "likes": interacciones_usuario.get("likes", False),
+                "dislikes": interacciones_usuario.get("dislikes", False),
+                "reports": interacciones_usuario.get("reports", False)
             }
-            
+
             comentarios.append(comentario)
+
         return jsonify(comentarios)
+
     except Exception as e:
         response = jsonify({"message": "Error de petición", "error": str(e)})
         response.status_code = 500
         return response
+
+
 
 ##obtener todas las comentarios
 def obtener_comentarios(collections):
@@ -97,31 +125,54 @@ def actualizar_comentario(collections, id):
         response.status = 401
         return response
 
-def actualizar_Interaccion_comentario(collectionsComentario, collectionsCommentInteraccion):
+def actualizar_interaccion_comentario(collectionsComentario, collectionsCommentInteraccion):
     try:
+        # Cargar datos desde la solicitud
         data = json.loads(request.data)
-        comment_interaccion_instance = CommentInteractionModel(data)
-        comment = collectionsComentario.find_one({'_id': ObjectId(data['idComment'])})
-        comment_model = ComentariosModel(comment)
-        tipoInteraccion = comment_interaccion_instance.tipo
-        countInteraccion = comment_model.interacciones[tipoInteraccion]
-        
-        result_interaccion = collectionsCommentInteraccion.find_one({'idUsuario': data['idUsuario'], 'idComment': data['idComment'], 'tipo': data['tipo']})
-        
-        if result_interaccion == None:
-          id = collectionsCommentInteraccion.insert_one(comment_interaccion_instance.__dict__).inserted_id
-          comment_model.interacciones[tipoInteraccion] = countInteraccion + 1
-          collectionsComentario.update_one({'_id': ObjectId(data['idComment'])}, {"$set": comment_model.__dict__})
-          return jsonify(str(id))
-        else:
-          estado = comment_interaccion_instance.estado
-          
-          comment_model.interacciones[tipoInteraccion] = countInteraccion + 1 if estado else countInteraccion - 1
-          collectionsCommentInteraccion.update_one({"_id": ObjectId(result_interaccion['_id'])}, {"$set": comment_interaccion_instance.__dict__})
-          collectionsComentario.update_one({'_id': ObjectId(data['idComment'])}, {"$set": comment_model.__dict__})
-          
-          return jsonify(str(result_interaccion['_id']))
-    except:
-        response = jsonify({"menssage":"Error al actualizar Interacciones"})
-        response.status = 401
+        id_comment = data.get('idComment')
+        id_usuario = data.get('idUsuario')
+        tipo_interaccion = data.get('tipo')
+        estado = data.get('estado')
+
+        if not id_comment or not id_usuario or not tipo_interaccion or estado is None:
+            return jsonify({"message": "Datos incompletos"}), 400
+
+        # Consulta inicial: encontrar el comentario y la interacción en una sola pasada
+        comment = collectionsComentario.find_one({"_id": ObjectId(id_comment)})
+        if not comment:
+            return jsonify({"message": "Comentario no encontrado"}), 404
+
+        # Obtener el conteo actual de interacciones del tipo especificado
+        interacciones = comment.get('interacciones', {})
+        count_interaccion = interacciones.get(tipo_interaccion, 0)
+
+        # Buscar o insertar la interacción
+        result_interaccion = collectionsCommentInteraccion.find_one_and_update(
+            {"idUsuario": id_usuario, "idComment": id_comment, "tipo": tipo_interaccion},
+            {"$set": {"estado": estado}},
+            upsert=True,
+            return_document=True
+        )
+
+        # Calcular el nuevo conteo de interacciones
+        if result_interaccion is None:  # Nueva interacción
+            nuevo_conteo = count_interaccion + 1 if estado else count_interaccion
+        else:  # Interacción existente
+            estado_anterior = result_interaccion.get('estado', False)
+            if estado_anterior != estado:  # Solo ajustar si el estado cambió
+                nuevo_conteo = count_interaccion + 1 if estado else count_interaccion - 1
+            else:
+                nuevo_conteo = count_interaccion
+
+        # Actualizar el comentario con el nuevo conteo
+        collectionsComentario.update_one(
+            {"_id": ObjectId(id_comment)},
+            {"$set": {f"interacciones.{tipo_interaccion}": nuevo_conteo}}
+        )
+
+        return jsonify({"message": "Interacción actualizada con éxito", "idComment": id_comment}), 200
+
+    except Exception as e:
+        response = jsonify({"message": "Error al actualizar interacciones", "error": str(e)})
+        response.status_code = 500
         return response

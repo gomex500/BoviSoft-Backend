@@ -8,7 +8,7 @@ from controllers.comentario_controller import (
     obtener_comentario,
     eliminar_comentario,
     actualizar_comentario,
-    actualizar_Interaccion_comentario
+    actualizar_interaccion_comentario
 )
 
 #inicalizando ruta
@@ -56,4 +56,4 @@ def actualizar_comentario_ruta(id):
   
 @comentario_routes.route('/interacciones/comentarios', methods=['POST'])
 def actualizar_interaccion_comentario_ruta():
-    return actualizar_Interaccion_comentario(collections('comentarios'), collections('interaccionesComment'))
+    return actualizar_interaccion_comentario(collections('comentarios'), collections('interaccionesComment'))

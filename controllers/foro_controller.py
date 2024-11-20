@@ -21,29 +21,50 @@ def insertar_foro(collections):
 ##obtener todas las foros
 def obtener_foros(collectionsForo, collectionsPostInteraccion):
     try:
-        
         user = g.current_user
+        if not user or 'id' not in user:
+            return jsonify({"message": "Usuario no autenticado"}), 401
+
         foros = []
+        foro_ids = []
+
+        # Obtener todos los foros y sus IDs
         for doc in collectionsForo.find():
             foro = ForoModel(doc).__dict__
             foro['id'] = str(doc['_id'])
-            
-            iLikedItForo = collectionsPostInteraccion.find_one({"idForo": foro['id'], "idUsuario": user['id'], "tipoInteraccion": "likes"})
-            iDidNotLikeForo = collectionsPostInteraccion.find_one({"idForo": foro['id'], "idUsuario": user['id'], "tipoInteraccion": "dislikes"})
-            iReportedForo = collectionsPostInteraccion.find_one({"idForo": foro['id'], "idUsuario": user['id'], "tipoInteraccion": "reports"})
-            
-            foro["userInteractions"] = {
-              "likes": iLikedItForo is not None,
-              "dislikes": iDidNotLikeForo is not None,
-              "reports": iReportedForo is not None
-            }
-            
+            foro_ids.append(foro['id'])
             foros.append(foro)
+
+        # Obtener todas las interacciones relevantes para este usuario y estos foros
+        interacciones = list(collectionsPostInteraccion.find({
+            "idForo": {"$in": foro_ids},
+            "idUsuario": user['id']
+        }))
+
+        # Mapear interacciones por tipo e ID de foro
+        interacciones_por_foro = {}
+        for interaccion in interacciones:
+            foro_id = interaccion["idForo"]
+            if foro_id not in interacciones_por_foro:
+                interacciones_por_foro[foro_id] = {}
+            interacciones_por_foro[foro_id][interaccion["tipoInteraccion"]] = True
+
+        # Añadir las interacciones del usuario a cada foro
+        for foro in foros:
+            interacciones_usuario = interacciones_por_foro.get(foro['id'], {})
+            foro["userInteractions"] = {
+                "likes": interacciones_usuario.get("likes", False),
+                "dislikes": interacciones_usuario.get("dislikes", False),
+                "reports": interacciones_usuario.get("reports", False)
+            }
+
         return jsonify(foros)
+
     except Exception as e:
         response = jsonify({"message": "Error de petición", "error": str(e)})
         response.status_code = 500
         return response
+
 
 
 #controlador mostrar foro
