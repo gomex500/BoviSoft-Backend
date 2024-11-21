@@ -22,7 +22,7 @@ def insertar_foro(collections):
 def obtener_foros(collectionsForo, collectionsPostInteraccion):
     try:
         user = g.current_user
-        if not user or 'id' not in user:
+        if not user or '_id' not in user:
             return jsonify({"message": "Usuario no autenticado"}), 401
 
         foros = []
@@ -38,7 +38,7 @@ def obtener_foros(collectionsForo, collectionsPostInteraccion):
         # Obtener todas las interacciones relevantes para este usuario y estos foros
         interacciones = list(collectionsPostInteraccion.find({
             "idForo": {"$in": foro_ids},
-            "idUsuario": user['id']
+            "idUsuario": user['_id']
         }))
 
         # Mapear interacciones por tipo e ID de foro
@@ -76,7 +76,7 @@ def obtener_foro(collections, id):
         return jsonify(foro_data)
     except:
         response = jsonify({"menssage":"error de peticion"})
-        response.status = 401
+        response.status = 500
         return response
 
 def actualizar_foro(collections, id):
