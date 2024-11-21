@@ -120,6 +120,10 @@ def login(collections):
 
         # Obtener el documento del usuario
         user_doc = collections.find_one({'email': user_instance.email})
+        user_doc["_id"] = str(user_doc['_id'])
+        user_doc["create_at"] = str(user_doc['create_at'])
+        user_doc["update_at"] = str(user_doc['update_at'])
+        
         user_data = {
             "id": str(user_doc['_id']),
             "nombre": user_doc['nombre'],
@@ -139,7 +143,7 @@ def login(collections):
             return response
 
         # Crear y enviar el token
-        token = crear_token(data=user_data)
+        token = crear_token(data=user_doc)
         return jsonify({'id': str(user_doc['_id']), "token": token.decode('utf-8')})
     except Exception as e:
         print(str(e))
