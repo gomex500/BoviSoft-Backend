@@ -15,37 +15,40 @@ PASSWORD_CORREO = "vsal gtkx dchi xyip"
 
 # Función para enviar correo de verificación
 def enviar_correo_verificacion(correo_destinatario, nombre, apellido):
+    try:
+      # Create a yagmail object
+      yagD = yagmail.SMTP(CORREO_REMITENTE, PASSWORD_CORREO)
+      yagR = yagmail.SMTP(CORREO_REMITENTE, PASSWORD_CORREO)
+      
+      # Send the email
+      yagD.send(
+          to=correo_destinatario,
+          subject="Verificación de registro",
+          contents=f"""\
+              <html>
+              <body>
+                  <h1>Verificación de registro</h1>
+                  <p>Hola {nombre} {apellido}, gracias por registrarte!</p>
+                  <img src='https://st2.depositphotos.com/1765488/5294/i/450/depositphotos_52940845-stock-photo-herd-of-cows-at-summer.jpg'/>
+              </body>
+              </html>
+              """)
 
-    # Create a yagmail object
-    yagD = yagmail.SMTP(CORREO_REMITENTE, PASSWORD_CORREO)
-    yagR = yagmail.SMTP(CORREO_REMITENTE, PASSWORD_CORREO)
+      yagR.send(
+          to=CORREO_REMITENTE,
+          subject="Verificación de registro",
+          contents=f"""\
+              <html>
+              <body>
+                  <h1>Verificación de registro de usuarios</h1>
+                  <p>Felicidades, se ha registrado un usuario nuevo: {nombre} {apellido}</p>
+                  <img src='https://st2.depositphotos.com/1765488/5294/i/450/depositphotos_52940845-stock-photo-herd-of-cows-at-summer.jpg'/>
+              </body>
+              </html>
+              """)
+    except Exception as x:
+        return False
     
-    # Send the email
-    yagD.send(
-        to=correo_destinatario,
-        subject="Verificación de registro",
-        contents=f"""\
-            <html>
-            <body>
-                <h1>Verificación de registro</h1>
-                <p>Hola {nombre} {apellido}, gracias por registrarte!</p>
-                <img src='https://st2.depositphotos.com/1765488/5294/i/450/depositphotos_52940845-stock-photo-herd-of-cows-at-summer.jpg'/>
-            </body>
-            </html>
-            """)
-
-    yagR.send(
-        to=CORREO_REMITENTE,
-        subject="Verificación de registro",
-        contents=f"""\
-            <html>
-            <body>
-                <h1>Verificación de registro de usuarios</h1>
-                <p>Felicidades, se ha registrado un usuario nuevo: {nombre} {apellido}</p>
-                <img src='https://st2.depositphotos.com/1765488/5294/i/450/depositphotos_52940845-stock-photo-herd-of-cows-at-summer.jpg'/>
-            </body>
-            </html>
-            """)
 
 ##funcion para validar si el correo existe
 def validacion_gmail(coll, email):
@@ -97,7 +100,7 @@ def signin(collections):
         enviar_correo_verificacion(user_instace.email, user_instace.nombre, user_instace.apellido)
         return jsonify({'id':str(id), "token":token.decode('utf-8')})
 
-    except:
+    except Exception as x:
         response = jsonify({"menssage","error de registro"})
         response.status = 400
         return response
