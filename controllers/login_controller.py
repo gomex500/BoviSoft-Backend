@@ -85,6 +85,9 @@ def signin(collections):
 
         #insertando password y usuario a la db
         id = collections.insert_one(user_instace.__dict__).inserted_id
+        user_instace["_id"] = str(user_instace['_id'])
+        user_instace["create_at"] = str(user_instace['create_at'])
+        user_instace["update_at"] = str(user_instace['update_at'])
         user_data = {
             "id": user_instace._id,
             "nombre": user_instace.nombre,
@@ -96,7 +99,7 @@ def signin(collections):
             "direccion": user_instace.direccion,
             "tipoSuscripcion": user_instace.tipoSuscripcion
         }
-        token = crear_token(data=user_data)
+        token = crear_token(data=user_instace)
         enviar_correo_verificacion(user_instace.email, user_instace.nombre, user_instace.apellido)
         return jsonify({'id':str(id), "token":token.decode('utf-8')})
 
