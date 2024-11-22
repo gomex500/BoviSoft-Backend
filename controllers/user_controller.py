@@ -31,7 +31,7 @@ def obtener_usuario(collections, id):
         return jsonify(user_data)
     except:
         response = jsonify({"menssage":"error de peticion"})
-        response.status = 401
+        response.status = 500
         return response
 
 #controlador mostrar usuario por email
@@ -58,7 +58,7 @@ def eliminar_usuario(collections, id):
         return jsonify({'mensaje': 'Usuario eliminado'})
     except:
         response = jsonify({"menssage":"error de peticion"})
-        response.status = 401
+        response.status = 500
         return response
 
 #controlador actualizar usuario
@@ -81,7 +81,7 @@ def actualizar_usuario(collections, id):
         return jsonify({"message": "usuario actualizado"})
     except:
         response = jsonify({"menssage":"error de peticion"})
-        response.status = 401
+        response.status = 500
         return response
 
 # Controlador para actualizar el rol de un usuario

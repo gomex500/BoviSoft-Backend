@@ -4,10 +4,12 @@ from datetime import datetime
 class ComentariosModel:
     def __init__(self, data):
         self.idUsuario = data.get('idUsuario', '')
-        self.idPublicacion = data.get('idPublicacion', '')
+        self.usuario = data.get('usuario', '')
+        self.avatar = data.get('avatar', '')
+        self.idForo = data.get('idForo', '')
         self.contenido = data.get('contenido', '')
+        self.interacciones = data.get('interacciones', {})
         self.fechaCreacion = data.get('fechaCreacion', '')
-        self.likes = data.get('likes', 0)
         self.create_at = data.get('create_at', datetime.now())
         self.update_at = data.get('update_at', datetime.now())
 
