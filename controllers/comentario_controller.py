@@ -19,7 +19,7 @@ def insertar_comentario(collections):
 def obtener_comentarios_por_foro(collections, collectionsInteraccion, foro_id):
     try:
         user = g.current_user
-        if not user or 'id' not in user:
+        if not user or '_id' not in user:
             return jsonify({"message": "Usuario no autenticado"}), 401
 
         # Obtener todos los comentarios del foro
@@ -33,7 +33,7 @@ def obtener_comentarios_por_foro(collections, collectionsInteraccion, foro_id):
         # Obtener todas las interacciones relevantes para este usuario y estos comentarios
         interacciones = list(collectionsInteraccion.find({
             "idComment": {"$in": comentario_ids},
-            "idUsuario": user['id']
+            "idUsuario": user['_id']
         }))
 
         # Mapear interacciones por tipo e ID de comentario
