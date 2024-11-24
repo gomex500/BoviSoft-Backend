@@ -29,12 +29,12 @@ def insertar_finca_ruta():
 #ruta mostrar fincas
 @finca_routes.route('/fincas/<idUsuario>', methods=['GET'])
 def obtener_finca_ruta(idUsuario):
-    return obtener_fincas(collections('fincas'), idUsuario)
+    return obtener_fincas(collections('fincas'), idUsuario, collections('bovinos'))
 
 #ruta mostrar finca
 @finca_routes.route('/finca/<id>', methods=['GET'])
 def obtener_finca_id_ruta(id):
-    return obtener_finca(collections('fincas'), id)
+    return obtener_finca(collections('fincas'), id, collections('bovinos'))
 
 #ruta eliminar finca
 @finca_routes.route('/finca/<id>', methods=['DELETE'])
